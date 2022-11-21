@@ -1,4 +1,14 @@
-function solveNQueens(n) {
-    const board = Array(n).fill().map(() => Array(n).fill(0));
-    placeQueens(board, 0, n);
+function placeQueens(board, colIndex, n) {
+    if (colIndex >= n) {
+        printBoard(board, n);
+        return;
+    }
+
+    for (let i = 0; i < n; i++) {
+        if (isSafe(board, i, colIndex, n)) {
+            board[i][colIndex] = 1;
+            placeQueens(board, colIndex + 1, n);
+            board[i][colIndex] = 0;
+        }
+    }
 }
